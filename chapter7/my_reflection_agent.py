@@ -39,7 +39,7 @@ from hello_agents import ReflectionAgent, HelloAgentsLLM, Config, Message, ToolR
 
 class MyReflectionAgent(ReflectionAgent):
     """
-    重写ReflectionAgent，添加自定义提示词和工具调用支持
+    重写ReflectionAgent
     """
     def __init__(
             self,
@@ -58,8 +58,6 @@ class MyReflectionAgent(ReflectionAgent):
 
     def run(self, input_text: str, **kwargs) -> str:
         """运行Reflection Agent"""
-        self.current_history = []
-        current_step = 0
         print(f"\n🤖 {self.name} 开始处理问题: {input_text}")
 
         # 1. 初始执行
