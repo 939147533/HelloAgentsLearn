@@ -51,7 +51,7 @@ class MyPlanAndSolveAgent(PlanAndSolveAgent):
             config: Optional[Config] = None,
             custom_prompts: Optional[Dict[str, str]] = None
     ):
-        super().__init__(self, name, llm, system_prompt, config)
+        super().__init__(name, llm, system_prompt, config)
         # 设置提示词模板：用户自定义优先，否则使用默认模板
         if custom_prompts:
             planner_prompt = custom_prompts.get("planner")
@@ -76,3 +76,9 @@ class MyPlanAndSolveAgent(PlanAndSolveAgent):
 
         # 2. 执行计划
         final_answer = self.executor.execute(input_text, plan, **kwargs)
+        print(f"\n--- 任务完成 ---\n最终答案: {final_answer}")
+        # 保存到历史记录
+        self.add_message(Message(input_text, "user"))
+        self.add_message(Message(final_answer, "assistant"))
+
+        return final_answer
