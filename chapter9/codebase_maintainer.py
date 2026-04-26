@@ -20,7 +20,10 @@ from hello_agents.context import ContextBuilder, ContextConfig, ContextPacket
 from hello_agents.tools import MemoryTool, NoteTool, TerminalTool
 from hello_agents.tools.registry import ToolRegistry
 from hello_agents.core.message import Message
-
+from dotenv import load_dotenv
+import os
+# 加载环境变量
+load_dotenv()
 
 class CodebaseMaintainer:
     """代码库维护助手 - 长程智能体示例

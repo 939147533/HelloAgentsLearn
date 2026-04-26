@@ -172,7 +172,8 @@ class MultiAgentTripPlanner:
                 env={"AMAP_MAPS_API_KEY": settings.amap_api_key},
                 auto_expand=True
             )
-
+            # 获取展开的工具列表
+            self.amap_tool.expandable = True
             # 创建景点搜索Agent
             print("  - 创建景点搜索Agent...")
             self.attraction_agent = SimpleAgent(
@@ -181,6 +182,7 @@ class MultiAgentTripPlanner:
                 system_prompt=ATTRACTION_AGENT_PROMPT
             )
             self.attraction_agent.add_tool(self.amap_tool)
+            print("可用工具列表：\n" + str(self.attraction_agent.list_tools()))
 
             # 创建天气查询Agent
             print("  - 创建天气查询Agent...")

@@ -212,9 +212,9 @@ import type { TripFormData } from '@/types'
 import type { Dayjs } from 'dayjs'
 
 const router = useRouter()
-const loading = ref(false)
-const loadingProgress = ref(0)
-const loadingStatus = ref('')
+const loading = ref(false) // 是否正在加载
+const loadingProgress = ref(0) // 加载进度
+const loadingStatus = ref('') // 加载状态
 
 const formData = reactive<TripFormData & { start_date: Dayjs | null; end_date: Dayjs | null }>({
   city: '',
@@ -269,7 +269,7 @@ const handleSubmit = async () => {
         loadingStatus.value = '📋 正在生成行程计划...'
       }
     }
-  }, 500)
+  }, 500) //每 500 毫秒更新一次进度条和状态文本
 
   try {
     const requestData: TripFormData = {

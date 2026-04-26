@@ -63,11 +63,18 @@ class PDFLearningAssistant:
 
         try:
             # 使用RAG工具处理PDF
+            # result = self.rag_tool.run({
+            #     "action":"add_document",
+            #     "file_path":pdf_path,
+            #     "chunk_size":1000,
+            #     "chunk_overlap":200
+            # })
             result = self.rag_tool.run({
-                "action":"add_document",
-                "file_path":pdf_path,
-                "chunk_size":1000,
-                "chunk_overlap":200
+                "action": "add_document",
+                "file_path": pdf_path,
+                "chunk_size": 500,
+                "chunk_overlap": 100,
+                "batch_size": 10
             })
 
             process_time = time.time() - start_time
@@ -291,6 +298,7 @@ def create_gradio_ui():
             response = f"💡 **回答**\n\n{response}"
 
         history.append([message, response])
+
         return "", history
 
     def add_note_ui(note_content: str, concept: str) -> str:
@@ -437,7 +445,7 @@ def main():
     demo.launch(
         server_name="0.0.0.0",
         server_port=7860,
-        share=False,
+        share=True,
         show_error=True
     )
 

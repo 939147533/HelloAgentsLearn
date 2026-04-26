@@ -1,8 +1,15 @@
 import re
 from llm_client import HelloAgentsLLM
 from tools import ToolExecutor, search
+import mlflow
 
-# (此处省略 REACT_PROMPT_TEMPLATE 的定义)
+# 开启自动追踪
+mlflow.openai.autolog()
+# 2. (可选) 配置 MLflow 追踪服务器和实验名称
+# 如果不设置，将使用默认的本地地址和名为 "Default" 的实验
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
+mlflow.set_experiment("my-ollama-experiment")
+
 REACT_PROMPT_TEMPLATE = """
 请注意，你是一个有能力调用外部工具的智能助手。
 
